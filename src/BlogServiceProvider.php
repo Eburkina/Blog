@@ -45,4 +45,6 @@ class BlogServiceProvider extends ServiceProvider
         __DIR__.'/routes/web.php' => base_path('routes/web.php')
     ], 'routes');
     }
+
+    
 }

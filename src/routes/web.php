@@ -13,16 +13,16 @@ Route::get('actualites/search', [BlogController::class, 'search'])->name('search
 
 
 
-Route::get('actualite/list', [ActualiteController::class, 'index'])->name('actualite-liste');
-Route::get('actualite/add', [ActualiteController::class, 'create'])->name('actualite-add');
-Route::post('actualite/store', [ActualiteController::class, 'store'])->name('actualite-store');
-Route::get('actualite/edit/{uuid}', [ActualiteController::class, 'edit'])->name('actualite-edit');
-Route::put('actualite/update/{uuid}', [ActualiteController::class, 'update'])->name('actualite-update');
-Route::delete('actualite/delete/{uuid}', [ActualiteController::class, 'delete'])->name('actualite-delete');
+Route::get('actualite/list', [ActualiteController::class, 'index'])->middleware(['auth'])->name('actualite-liste');
+Route::get('actualite/add', [ActualiteController::class, 'create'])->middleware(['auth'])->name('actualite-add');
+Route::post('actualite/store', [ActualiteController::class, 'store'])->middleware(['auth'])->name('actualite-store');
+Route::get('actualite/edit/{uuid}', [ActualiteController::class, 'edit'])->middleware(['auth'])->name('actualite-edit');
+Route::put('actualite/update/{uuid}', [ActualiteController::class, 'update'])->middleware(['auth'])->name('actualite-update');
+Route::delete('actualite/delete/{uuid}', [ActualiteController::class, 'delete'])->middleware(['auth'])->name('actualite-delete');
 
-Route::get('categorie/list', [CategorieController::class, 'index'])->name('categorie-list');
-Route::get('categorie/add', [CategorieController::class, 'create'])->name('categorie-add');
-Route::post('categorie/store', [CategorieController::class, 'store'])->name('categorie-store');
-Route::get('categorie/edit/{uuid}', [CategorieController::class, 'edit'])->name('categorie-edit');
-Route::put('categorie/update/{uuid}', [CategorieController::class, 'update'])->name('categorie-update');
-Route::delete('categorie/delete/{uuid}', [CategorieController::class, 'delete'])->name('categorie-delete');
+Route::get('categorie/list', [CategorieController::class, 'index'])->middleware(['auth'])->name('categorie-list');
+Route::get('categorie/add', [CategorieController::class, 'create'])->middleware(['auth'])->name('categorie-add');
+Route::post('categorie/store', [CategorieController::class, 'store'])->middleware(['auth'])->name('categorie-store');
+Route::get('categorie/edit/{uuid}', [CategorieController::class, 'edit'])->middleware(['auth'])->name('categorie-edit');
+Route::put('categorie/update/{uuid}', [CategorieController::class, 'update'])->middleware(['auth'])->name('categorie-update');
+Route::delete('categorie/delete/{uuid}', [CategorieController::class, 'delete'])->middleware(['auth'])->name('categorie-delete');
