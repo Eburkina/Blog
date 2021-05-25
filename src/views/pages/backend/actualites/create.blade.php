@@ -113,6 +113,7 @@ a.mod{
             <div class="modal-footer">
                 <form action="{{route('actualite-delete', $actualite->uuid)}}" method="POST">
                     @method('DELETE')
+                    @csrf
                     <button type="submit" class="btn btn-primary">Confirmer</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

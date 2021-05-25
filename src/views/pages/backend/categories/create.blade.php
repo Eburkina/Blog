@@ -35,29 +35,8 @@
                          @if ($categorie->uuid !=null)
                              
                          <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal{{$categorie->uuid}}">Supprimer</a>    
-                         <div class="modal fade" id="exampleModal{{$categorie->uuid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                  COnfirmer la suppression
-                              </div>
-                              <div class="modal-footer">
-                                  <form action="{{route('categorie-delete', $categorie->uuid)}}" method="POST">
-                                      @method('DELETE')
-                                      <button type="submit" class="btn btn-primary">Confirmer</button>
-                                  </form>
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                         @endif   
+                       
+                        @endif   
                          <br>  <br> </div>                       
                     </form>
                 </div>
@@ -87,6 +66,7 @@
          <div class="modal-footer">
              <form action="{{route('categorie-delete', $categorie->uuid)}}" method="POST">
                  @method('DELETE')
+                 @csrf
                  <button type="submit" class="btn btn-primary">Confirmer</button>
              </form>
              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -94,5 +74,7 @@
        </div>
      </div>
  </div>
+
+
     @endif  
 @endsection

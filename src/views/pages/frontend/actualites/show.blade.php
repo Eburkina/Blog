@@ -97,7 +97,7 @@ setlocale(LC_TIME, "fr_FR", "French");
                 <ul class="tags">
                     @foreach ($actualites as $item)
                         
-                    <li><a href="" class="tag">{{$item->tags}}</a></li>
+                    <li><a href="{{route('actubystags', $item->tags)}} " class="tag">{{$item->tags}}</a></li>
                     @endforeach
                     
                 </ul>
