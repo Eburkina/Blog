@@ -30,7 +30,7 @@ a.mod{
                         @method('POST')
 
                 @endif
-                
+                @csrf
                     <div class="form-content">
                         
                         <div class="form-row  ">
