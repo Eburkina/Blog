@@ -27,4 +27,3 @@ Route::get('dashboard/categorie/edit/{uuid}', [CategorieController::class, 'edit
 Route::put('dashboard/categorie/update/{uuid}', [CategorieController::class, 'update'])->middleware(['auth'])->name('categorie-update');
 Route::delete('dashboard/categorie/delete/{uuid}', [CategorieController::class, 'delete'])->middleware(['auth'])->name('categorie-delete');
 
-require __DIR__.'/auth.php';
