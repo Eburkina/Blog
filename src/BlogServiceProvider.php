@@ -41,9 +41,11 @@ class BlogServiceProvider extends ServiceProvider
     $this->publishes([
         __DIR__.'/Models' => app_path('Models/')
     ], 'Models');
-    $this->publishes([
-        __DIR__.'/routes/web.php' => base_path('routes/web.php')
-    ], 'routes');
+
+
+    copy(__DIR__.'/routes/web.php', base_path('routes/web.php'));
+
+
     }
 
     
