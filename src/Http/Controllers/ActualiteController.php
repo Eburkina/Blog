@@ -39,7 +39,7 @@ class ActualiteController extends Controller
         $actualite->category_id =$request->categorie;
         $actualite->body         =$request->body;
         $actualite->tags         = $request->tags;
-        $actualite->auteur      = Auth::user()->id];
+        $actualite->auteur      = Auth::user()->id;
         // "auteur"      =>$request->titre,
         $actualite->image_couverture = $request->file('image')->store('actualites');
         $actualite->nombre_lus=0;
