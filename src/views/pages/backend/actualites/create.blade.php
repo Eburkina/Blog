@@ -5,9 +5,7 @@
 a.mod{
     margin-left: 1rem;
 }
-.actualite.content {
-    padding-left: 1%;
-}
+
 </style>
     <div class="container">
 

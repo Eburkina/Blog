@@ -20,6 +20,9 @@ section.actualite {
 90deg
 ,#fff 1%,#f6f6f6 37%,#f5f5f5);
 }
+.actualite.content {
+    padding-left: 1%;
+}
 </style>
     <section class="actualite">
                 <div class="container">
