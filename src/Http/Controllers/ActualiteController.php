@@ -3,9 +3,9 @@
 namespace Eburkina\Blog\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Eservice\Blog\Models\Actualite;
-use Eservice\Blog\Http\Requests\StoreActualiteRequest;
-use Eservice\Blog\Models\Category;
+use Eburkina\Blog\Models\Actualite;
+use Eburkina\Blog\Http\Requests\StoreActualiteRequest;
+use Eburkina\Blog\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;

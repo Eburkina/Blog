@@ -2,7 +2,7 @@
 
 namespace Eburkina\Blog\Models;
 
-use Eservice\Blog\Http\Traits\UsesUuid;
+use Eburkina\Blog\Http\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;

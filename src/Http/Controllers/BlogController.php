@@ -2,8 +2,8 @@
 namespace Eburkina\Blog\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Eservice\Blog\Models\Actualite;
-use Eservice\Blog\Models\Category;
+use Eburkina\Blog\Models\Actualite;
+use Eburkina\Blog\Models\Category;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
