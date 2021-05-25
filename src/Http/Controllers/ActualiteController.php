@@ -44,7 +44,7 @@ class ActualiteController extends Controller
         $actualite->image_couverture = $request->file('image')->store('actualites');
         $actualite->nombre_lus=0;
         $actualite->save();
-        Session::flash('success', 'Actualité créée avec success');
+        Session::flash('success', 'Article créé avec success');
         return redirect()->route('actualite-liste');
 
     }
@@ -73,12 +73,12 @@ class ActualiteController extends Controller
         }
         $actualite->save();
       
-        return redirect()->route('actualite-liste')->with('success', 'Actualité créée avec success');
+        return redirect()->route('actualite-liste')->with('success', 'Article modifié avec success');
     }
 
     public function delete($uuid){  
         Actualite::where('uuid', $uuid)->delete();
-        return redirect()->route('actualite-liste')->with('success','Actualité supprimée avec success.');
+        return redirect()->route('actualite-liste')->with('success','Articles supprimée avec success.');
        
     }
 }

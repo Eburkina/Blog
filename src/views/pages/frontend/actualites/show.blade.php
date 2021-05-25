@@ -36,7 +36,7 @@ setlocale(LC_TIME, "fr_FR", "French");
                   <div class="row">
                       <div class="col-12 col-md-12">
                         Posté le  {{\Carbon\Carbon::parse($actualite->created_at)->formatLocalized('%d %B %Y')}} par
-                        {{-- <a href="#">{{$actualite->user->name}}</a> --}}
+                        <a href="#">{{$actualite->user->name}}</a>
                       </div>
                      
                   </div>
