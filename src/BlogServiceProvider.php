@@ -43,9 +43,7 @@ class BlogServiceProvider extends ServiceProvider
     ], 'Models');
 
 
-    copy(__DIR__.'/routes/web.php', base_path('routes/web.php'));
-
-
+    
     }
 
     
