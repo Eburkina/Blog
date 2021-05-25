@@ -1,0 +1,14 @@
+{
+    "name": "eburkina/blog",
+    "description": "Package de gestion des actualit\u0000 de switch maker",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "switch maker",
+            "email": "a.traore@switch-maker.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
