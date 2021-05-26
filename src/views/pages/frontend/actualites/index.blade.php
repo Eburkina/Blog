@@ -58,6 +58,9 @@ section.actualite {
                         </div>
                                 </div>                          
                             @endforeach
+                            <div class="text-center ">
+                                {{$actualite->links() }}
+                            </div
                         </div>
                         {{-- <div class="text-center ">
                             <a href="#" class="btn btn-outline-danger bouton-voire-plus">Toutes les actualités</a>
