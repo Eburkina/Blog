@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('actualites', [BlogController::class, 'index']);
 Route::get('actualites/show/{uuid}', [BlogController::class, 'show'])->name('actualites-show');
 Route::get('actualites/parcategorie/{uuid}', [BlogController::class, 'actualitebycategorie'])->name('acticlebycategorie');
+Route::get('actualites/partag/{tags}', [BlogController::class, 'actualitebytags'])->name('actubystags');
 Route::get('actualites/search', [BlogController::class, 'search'])->name('search');
 
 

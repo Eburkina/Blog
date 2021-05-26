@@ -44,5 +44,9 @@ class BlogController extends Controller
            'categorie'=>Category::where('uuid', $uuid)->first()
            ]);
    }
+   public function actualitebytags($tags)
+   {
+       return view('Blog:pages.frontend.actualites.actubytag', ['actualite'=>Actualite::where('tags', 'LIKE',  "%{$tags}%")->get(), 'tag'=>$tags]);
+   }
 
 }
