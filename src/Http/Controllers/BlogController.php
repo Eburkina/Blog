@@ -46,7 +46,7 @@ class BlogController extends Controller
    }
    public function actualitebytags($tags)
    {
-       return view('Blog::pages.frontend.actualites.actubytag', ['actualite'=>Actualite::where('tags', 'LIKE',  "%{$tags}%")->get(), 'tag'=>$tags]);
+       return view('Blog::pages.frontend.actualites.actubytag', ['actualite'=>Actualite::where('tags', 'LIKE',  "%{$tags}%")->get(), 'tags'=>$tags]);
    }
 
 }
