@@ -10,7 +10,7 @@ class BlogController extends Controller
 {
     public function index(){
         
-        return view('vendor.pages.frontend.actualites.index', ['actualite'=> Actualite::latest()->take(4)->get()]);
+        return view('vendor.pages.frontend.actualites.index', ['actualite'=> Actualite::paginate(10)]);
     }
 
    public function show($uuid){
