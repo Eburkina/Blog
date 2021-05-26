@@ -5,7 +5,7 @@ use Eburkina\Blog\Http\Controllers\BlogController;
 use Eburkina\Blog\Http\Controllers\CategorieController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('actualites', [BlogController::class, 'index']);
+Route::get('actualites', [BlogController::class, 'index'])->name('actualites');
 Route::get('actualites/show/{uuid}', [BlogController::class, 'show'])->name('actualites-show');
 Route::get('actualites/parcategorie/{uuid}', [BlogController::class, 'actualitebycategorie'])->name('acticlebycategorie');
 Route::get('actualites/partag/{tags}', [BlogController::class, 'actualitebytags'])->name('actubystags');
