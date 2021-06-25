@@ -16,7 +16,7 @@ Route::get('actualites/search', [BlogController::class, 'search'])->name('search
 
 Route::group(['middleware' => ['web']], function () {
   
-    //Route::get('/dashboard/actualite/list', [ActualiteController::class, 'index'])->name('actualite-liste');
+    Route::get('/dashboard/actualite/list', [ActualiteController::class, 'index'])->name('actualite-liste');
     Route::get('/dashboard/actualite/add', [ActualiteController::class, 'create'])->name('actualite-add');
     Route::post('dashboard/actualite/store', [ActualiteController::class, 'store'])->name('actualite-store');
     Route::get('dashboard/actualite/edit/{uuid}', [ActualiteController::class, 'edit'])->name('actualite-edit');

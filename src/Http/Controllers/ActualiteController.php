@@ -15,16 +15,16 @@ class ActualiteController extends Controller
 {
     public function __construct()
 {
-    $this->middleware('auth');
+    $this->middleware('AdminAuth');
 }
     public function index(){
-        return view('Blog::pages.backend.actualites.index', ['actualite'=>Actualite::paginate(4)]);
+        return view('vendor.pages.backend.actualites.index', ['actualite'=>Actualite::paginate(4)]);
     }
     
     public function create(){
         $actualite = new Actualite;
         
-        return view('Blog::pages.backend.actualites.create',[ 
+        return view('vendor.pages.backend.actualites.create',[ 
             "actualite"=> new Actualite(),
              "categorie"=>Category::all(),
              'button'=>'Ajouter' 
@@ -32,14 +32,15 @@ class ActualiteController extends Controller
     }
 
     public function store(StoreActualiteRequest $request){
-        
+        // dd($request->all());
+        // dd(Auth::Guard('admin')->user());
         $actualite=  new Actualite();
 
         $actualite->titre        =$request->titre;
         $actualite->category_id =$request->categorie;
         $actualite->body         =$request->body;
         $actualite->tags         = $request->tags;
-        $actualite->auteur      = Auth::user()->id;
+        $actualite->auteur      = Auth::Guard('admin')->user()->uuid;
         // "auteur"      =>$request->titre,
         $actualite->image_couverture = $request->file('image')->store('actualites');
         $actualite->nombre_lus=0;
@@ -50,7 +51,7 @@ class ActualiteController extends Controller
     }
 
     public function edit($uuid){
-        return view('Blog::pages.backend.actualites.create', [
+        return view('vendor.pages.backend.actualites.create', [
             'actualite'=>Actualite::where('uuid', $uuid)->first(),
              'categorie'=>Category::all(),
              'button'=>'Modifier'

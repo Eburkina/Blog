@@ -12,16 +12,16 @@ class CategorieController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('AdminAuth');
     }
 
     public function index(){
         $categorie = Category::paginate(4);
-        return view('Blog::pages.backend.categories.index', compact('categorie'));
+        return view('vendor.pages.backend.categories.index', compact('categorie'));
     }
     
     public function create(){
-        return view('Blog::pages.backend.categories.create',[    "categorie" => new Category(), 'button'=>'Ajouter' ]);
+        return view('vendor.pages.backend.categories.create',[    "categorie" => new Category(), 'button'=>'Ajouter' ]);
     }
     
     public function store(StoreCategorieRequest $request){
@@ -31,7 +31,7 @@ class CategorieController extends Controller
     }
 
     public function edit($uuid){
-        return view('Blog::pages.backend.categories.create', [ "categorie" => Category::where('uuid', $uuid)->first(), 'button'=>'Modifier']);
+        return view('vendor.pages.backend.categories.create', [ "categorie" => Category::where('uuid', $uuid)->first(), 'button'=>'Modifier']);
     }
 
     public function update(Request $request, $uuid){
