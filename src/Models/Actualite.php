@@ -22,6 +22,7 @@ class Actualite extends Model
         'category_id',
         'nombre_lus',
         'titre',
+        'publish',
         'body',
         'image_couverture',
         'auteur',

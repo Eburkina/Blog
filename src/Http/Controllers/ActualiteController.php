@@ -18,16 +18,19 @@ class ActualiteController extends Controller
     $this->middleware('AdminAuth');
 }
     public function index(){
-        return view('vendor.pages.backend.actualites.index', ['actualite'=>Actualite::paginate(4)]);
+        return view('vendor.pages.backend.actualites.index', [
+            'actualite'=>Actualite::where('publish',true)->get(),
+            'titre'=>'Actualités Publiées'
+        ]);
     }
-    
+
     public function create(){
         $actualite = new Actualite;
-        
-        return view('vendor.pages.backend.actualites.create',[ 
+
+        return view('vendor.pages.backend.actualites.create',[
             "actualite"=> new Actualite(),
              "categorie"=>Category::all(),
-             'button'=>'Ajouter' 
+             'button'=>'Ajouter'
               ]);
     }
 
@@ -73,13 +76,13 @@ class ActualiteController extends Controller
             $actualite->image_couverture = $request->file('image')->store('actualites');
         }
         $actualite->save();
-      
+
         return redirect()->route('actualite-liste')->with('success', 'Article modifié avec success');
     }
 
-    public function delete($uuid){  
+    public function delete($uuid){
         Actualite::where('uuid', $uuid)->delete();
         return redirect()->route('actualite-liste')->with('success','Articles supprimée avec success.');
-       
+
     }
 }

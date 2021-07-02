@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateActualitesTable extends Migration
 {
@@ -17,6 +17,7 @@ class CreateActualitesTable extends Migration
             $table->uuid('uuid')->primary();
             $table->uuid('category_id');
             $table->integer('nombre_lus');
+            $table->boolean('publish')->default(false);
             $table->string('titre',100);
             $table->text('body');
             $table->string('image_couverture',100);
