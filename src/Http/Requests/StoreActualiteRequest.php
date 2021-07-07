@@ -25,10 +25,11 @@ class StoreActualiteRequest extends FormRequest
     {
         return [
             'titre'                 => 'required',
-            // 'body'                  => 'required',
+            'body'                  => 'required',
+            'categorie'             => 'required',
             'image'                 => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tags'                  => 'required',
-          
+
         ];
     }
 }

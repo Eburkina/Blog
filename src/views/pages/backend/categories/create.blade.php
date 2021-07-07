@@ -1,80 +1,46 @@
 @extends('Blog::layouts.master')
 @section('content')
 <section class="dashboard">
-    <div class="container">
-
-      <div class="row">
-        @include('Blog::partials.sidebar')    
-        <div class="col-md-9 mb-5 mt-5" >
-          <div class="dashboard-contenu"><br>
-           
-       
-
-
-            <h5 class="text-center mb-4">
-              Categories
-            </h5>
-                <div class="row">
-                @if($categorie->uuid !=null)
-                    <form action="{{route('categorie-update', $categorie->uuid)}}" method="Post" class="col-md-8 offset-md-2">
-                        @method('PUT')
-
-                @else
-                  
-                    <form action="{{route('categorie-store')}}" method="POST" class="col-md-8 offset-md-2">
-                        @method('POST')
-
-                @endif
-                        @csrf
-                        <div class="col-12 ml-10 ">
-                            <input type="text" name="titre" class="form-control " value="{{old('titre')?? $categorie->titre}}" placeholder="Titre de la catégorie">
-                            {{-- @error('profession')<div class="invalid-feedback">{{ $message }}</div>@enderror --}}
-                        </div> <br>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-outline-info btn-sm">{{$button}}</button>    
-                         @if ($categorie->uuid !=null)
-                             
-                         <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal{{$categorie->uuid}}">Supprimer</a>    
-                       
-                        @endif   
-                         <br>  <br> </div>                       
-                    </form>
-                </div>
-
-               
+    <div class="col-md-10 offset-1">
+        <div class="card">
+            @if($categorie->uuid !=null)
+            <div class="card-header">
+                <h3 class="card-title">{{ $categorie->titre }}</h3>
             </div>
-        </div>
+          <form action="{{route('categorie-update', $categorie->uuid)}}" method="Post" >
+              @method('PUT')
+            @else
+            <div class="card-header">
+                <h3 class="card-title">Nouvelle Catégorie</h3>
+            </div>
+          <form action="{{route('categorie-store')}}" method="POST">
+              @method('POST')
+            @endif
+              @csrf
+    <div class="card-body">
+      <div class="form-group row d-flex">
+          <label for="titre" class="col-md-3">Libellé de la Catégorie</label>
+          <div class="col-md-9">
+          <input type="text" class="form-control" name="titre" placeholder="Libellé de la Catégorie" value="{{old('titre')?? $categorie->titre}}" >
+          </div>
+      </div>
+      <div class="card-footer text-center">
+        <button class="btn btn-outline-info btn-sm">{{$button}}</button>
+        @if ($categorie->uuid !=null)
+        <a type="button" class="btn btn-default btn-sm mod mr-2" href="{{route('categorie-list')}}" >Annuler</a>
+        @endif
+      </div>
+      @if ($categorie->uuid !=null)
+      <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-outline-danger btn-sm mr-2 text-light  mod" data-toggle="modal" data-target="#supp{{$categorie->uuid}}"><i class="fas fa-trash-alt text-light"></i>Supprimer</button>
+      </div>
+      @endif
+  </div>
+    </form>
+    @if ($categorie->uuid != null)
+     @include('vendor.partials._confirmation_modal', ['modalUrl'=>'categorie-delete','uuid'=>$categorie->uuid,'idModal' => "supp".$categorie->uuid ,'message'=>'Vous êtes sur le point de supprimer la catégorie '.$categorie->titre])
+    @endif
     </div>
     </div>
-    </section>
-
-    @if ($categorie->uuid !=null)
-                             
-   
-    <div class="modal fade" id="exampleModal{{$categorie->uuid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
-           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-           </button>
-         </div>
-         <div class="modal-body">
-             COnfirmer la suppression
-         </div>
-         <div class="modal-footer">
-             <form action="{{route('categorie-delete', $categorie->uuid)}}" method="POST">
-                 @method('DELETE')
-                 @csrf
-                 <button type="submit" class="btn btn-primary">Confirmer</button>
-             </form>
-             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         </div>
-       </div>
-     </div>
- </div>
-
-
-    @endif  
-@endsection
+</section>
+    @endsection

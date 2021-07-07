@@ -2,7 +2,7 @@
 
 namespace Eburkina\Blog\Models;
 
-use App\Models\User;
+use App\Models\Admin;
 use Eburkina\Blog\Http\Traits\UsesUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -32,8 +32,8 @@ class Actualite extends Model
     {
         return $this->belongsTo(Category::class,'category_id','uuid');
     }
-    public function user()
+    public function admin()
     {
-        return $this->belongsTo(User::class, 'auteur', 'id');
+        return $this->belongsTo(Admin::class, 'auteur', 'uuid');
     }
 }

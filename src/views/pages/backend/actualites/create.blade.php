@@ -7,120 +7,143 @@ a.mod{
 }
 
 </style>
-    <div class="container">
-
-      <div class="row">
-        @include('Blog::partials.sidebar')    
-        <div class="col-md-9 mb-5 mt-5" >
-          <div class="dashboard-contenu"><br>
-           
-            <h5 class="text-center mb-4">
-              Ajout Actualité
-            </h5>
-                
-            <div class="form-header"></div>
-            <div class="container"> 
-               
-                @if($actualite->uuid != null)
-                    <form action="{{route('actualite-update', $actualite->uuid)}}" method="Post" class="col-md-8 offset-md-2" enctype= 'multipart/form-data'>
-                        @method('PUT')
-
+<div class="container">
+    <div class="page-header">
+        <div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('actualite-liste') }}">Actualités</a></li>
+                @if($actualite->uuid ==null)
+                <li class="breadcrumb-item"><a href="#">Nouvelle Actualité</a></li>
                 @else
-                  
-                    <form action="{{route('actualite-store')}}" method="POST" class="col-md-8 offset-md-2" enctype= 'multipart/form-data'>
-                        @method('POST')
-
+				<li class="breadcrumb-item"><a href="#">{{ $actualite->titre }}</a></li>
                 @endif
-                @csrf
-                    <div class="form-content">
-                        
-                        <div class="form-row  ">
-                            <div class="col-8 offset-2">
-                                <label for="titre">Titre<span class="obligatoire">: *</span></label>
-                            <input type="text" name="titre" class="form-control " value="{{old('titre')?? $actualite->titre}}">
-                            {{-- @error('titre')<div class="invalid-feedback">{{ $message }}</div>@enderror --}}
+            </ol>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 mb-2">
+        @include('partials._notifications')
+    </div>
+    <div class="card ">
+        @if($actualite->uuid != null)
+        <div class="card-header">
+            <h3 class="card-title">{{$actualite->titre}}</h3>
+        </div>
+            <form action="{{route('actualite-update', $actualite->uuid)}}" method="Post"  enctype= 'multipart/form-data'>
+                @method('PUT')
+
+        @else
+        <div class="card-header">
+            <h3 class="card-title">Nouvelle actualité</h3>
+        </div>
+            <form action="{{route('actualite-store')}}" method="POST"  enctype= 'multipart/form-data'>
+                @method('POST')
+
+        @endif
+        @csrf
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-md-12 d-flex">
+                    <div class="col-sm-8">
+                        <div class="form-group row  d-flex">
+                            <label for="colFormLabelSm" class="col-sm-3 col-form-label text-right">Titre:</label>
+                            <div class="col-sm-9">
+                            <input type="text" class="form-control" name="titre"  placeholder="Titre actualité" value="{{old('titre')?? $actualite->titre}}" >
                             </div>
                         </div>
-                        <div class="form-row  ">
-
-                            <div class="col-8 offset-2">
-                                <label for="">Catégorie Actualite<span class="obligatoire">: *</span></label>
-                                <select name="categorie" id="" class="form-control" >
-                                    <option  disabled selected value="">Catégorie Actualite</option>
+                        <div class="form-group row d-flex">
+                            <label for="colFormLabelSm" class="col-sm-3 col-form-label text-right">Tags:</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="tags" data-role="tagsinput" placeholder="Tags" class="form-control" value="{{old('tags')?? $actualite->tags}}" />
+                            </div>
+                        </div>
+                        <div class="form-group form-group row d-flex">
+                            <label for="colFormLabelSm" class="col-sm-3 col-form-label text-right">Image de couverture:</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" name="image" placeholder="Image" value="{{old('image')?? $actualite->image}}" onchange="previewFile(this)" >
+                            </div>
+                        </div>
+                        <div class="form-group row d-flex">
+                            <label for="colFormLabelSm" class="col-sm-3 col-form-label text-right">Catégorie:</label>
+                            <div class="col-sm-9">
+                                <select name="categorie" id="options" class="form-control form-control custom-select select2-show-search">
+                                    <option  selected="" value="">Veuillez choisir le tribunal de grande instance </option>
                                     @foreach ($categorie as $item)
                                     <option @if ($actualite->category_id == $item->uuid)
-                                       selected
-                                       
+                                        selected
+
                                     @endif  value="{{$item->uuid}}">{{$item->titre}}</option>
                                     @endforeach
+
                                 </select>
-                                {{-- @error('categorie')<div class="invalid-feedback">{{ $message }}</div>@enderror --}}
                             </div>
                         </div>
-                        <div class="form-row  ">
-
-                            <div class="col-8 offset-2">
-                                <label for="exampleFormControlTextarea1">Description </label>
-                                <textarea class="form-control" name="body" id="exampleFormControlTextarea1" rows="3">{{$actualite->body}}</textarea>
-                            </div>
-                        </div>
-                        <div class="form-row ">
-
-                            <div class="col-8 offset-2">
-                                <label for="image">Image <span class="obligatoire">: *</span></label>
-                        
-                                <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
-                            </div>
-                        </div>
-                        <div class="form-row ">
-                            <div class="col-8 offset-2">
-                                <label for="tags">Tags <span class="obligatoire">: *</span></label><br>
-                                <input data-role="tagsinput" class="" type="text" name="tags" value="{{old('tags')?? $actualite->tags}}" >
-                            </div>
-                        </div>
-                    
-                        <div class="col my-2 pl-5 d-flex justify-content-center">
-                            <button class="btn btn-outline-info btn-sm">{{$button}}</button>
-
-                            @if ($actualite->uuid !=null)                             
-                         <a type="button" class="btn btn-danger mod" data-toggle="modal" data-target="#exampleModal{{$actualite->uuid}}">Supprimer</a>    
-                        
-                  </div>
-                         @endif 
-                        </div>
-                        <br>
                     </div>
-                </form>
-               
+                    <div class="col-sm-2 offset-1 thumbnail">
+                            <img id="preview" src="{{ asset('storage/'.$actualite->image_couverture)}}" alt="image de couverture" class="thumbimg ">
+                    </div>
+                </div>
+                <div class="col-md-12 mt-2">
+                    <div class="form-group form-group row d-flex mx-2">
+                        <label for="colFormLabelSm" class="col-sm-2 col-form-label text-right">Description:</label>
+                        <div class="col-sm-10">
+                            <textarea id="my-textarea" class="form-control descriptionText" name="body" placeholder="Description" rows="2">{{old('body')?? $actualite->body}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer text-center">
+                <button class="btn btn-outline-default btn-sm mr-2"><i class="fas fa-edit"></i> {{$button}}</button>
+                @if ($actualite->uuid !=null)
+                <a type="button" class="btn btn-outline-default btn-sm mod mr-2" href="{{route('actualite-liste')}}" ><i class="fas fa-undo    "></i> Annuler</a>
+                @if ($actualite->publish ==false)
+                <button type="button" class="btn btn-outline-success btn-sm mr-2" data-toggle="modal" data-target="#publish{{$actualite->uuid}}" data-whatever="@mdo"><i class="fas fa-check-double"></i> Publier</button>
+                @else
+                <button type="button" class="btn btn-outline-default btn-sm mr-2" data-toggle="modal" data-target="#publish{{$actualite->uuid}}" data-whatever="@mdo"><i class="fas fa-ban    "></i> Brouillon</button>
+                @endif
+                @endif
+            </div>
+            <div class="d-flex justify-content-end">
+                @if ($actualite->uuid !=null)
+                <a type="button" class="btn btn-danger btn-sm mr-2 text-light mod" data-toggle="modal" data-target="#exampleModal{{$actualite->uuid}}" data-whatever="@fat"><i class="fas fa-trash-alt text-light"></i>Supprimer</a>
+                @include('vendor.partials._confirmation_modal', ['modalUrl'=>'publish','idModal' => "publish".$actualite->uuid,'uuid'=>$actualite->uuid,'message'=>'Vous êtes sur le point de modifier l\'affichage de l\'article '.$actualite->titre])
+                @endif
             </div>
         </div>
-    </div>
-    </div>
-    </section>
-    @if ($actualite->uuid != null)
-    <div class="modal fade" id="exampleModal{{$actualite->uuid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                Confirmer la suppression
-            </div>
-            <div class="modal-footer">
-                <form action="{{route('actualite-delete', $actualite->uuid)}}" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit" class="btn btn-primary">Confirmer</button>
-                </form>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-    </div> 
-    @endif
-   
+
+    </form>
+</div>
+</div>
+@if ($actualite->uuid != null)
+
+@include('vendor.partials._confirmation_modal', ['modalUrl'=>'actualite-delete','uuid'=>$actualite->uuid,'idModal' => "exampleModal".$actualite->uuid,'message'=>'Vous êtes sur le point de supprimer l\'article '.$actualite->titre])
+@endif
+
+
+
 @endsection
+@push('head')
+<script>
+    (function($) {
+    $('.descriptionText').richText();
+})(jQuery);
+
+ //affichage de la photo de profil-------------
+ function previewFile(input){
+            var file = $('input[type="file"]').get(0).files[0];
+
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        $('#preview').attr('src', reader.result);
+                    }
+                    reader.readAsDataURL(file)
+                }
+        }
+
+</script>
+@endpush
