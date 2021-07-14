@@ -31,7 +31,7 @@ class CategorieController extends Controller
     }
 
     public function edit($uuid){
-        return view('Blog::pages.backend.categories.create', [ "categorie" => Category::where('uuid', $uuid)->first(), 'button'=>'Modifier']);
+        return view('vendor.pages.backend.categories.create', [ "categorie" => Category::where('uuid', $uuid)->first(), 'button'=>'Modifier']);
     }
 
     public function update(Request $request, $uuid){

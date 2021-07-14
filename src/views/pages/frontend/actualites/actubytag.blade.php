@@ -31,6 +31,9 @@ section.actualite {
                     </div>
                     <div class="sect-content">
                         <div class="row mb-3 ">
+                            @if ($actualite->count() == 0)
+                            <h4>Aucune actualité correspondant à cette catégorie</h4>
+                            @else
                             @foreach ($actualite as $item)
                             <div class="col-md-6">
                                 <div class="actualite-box d-md-flex">
@@ -54,7 +57,8 @@ section.actualite {
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                             @endforeach
+                            @endif
                         </div>
                         {{-- <div class="text-center ">
                             <a href="#" class="btn btn-outline-danger bouton-voire-plus">Toutes les actualités</a>

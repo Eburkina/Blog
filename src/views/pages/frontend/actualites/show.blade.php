@@ -22,12 +22,14 @@ setlocale(LC_TIME, "fr_FR", "French");
         <div class="row">
 
           <!-- Blog Entries Column -->
-          <h2 class="my-4 text-capitalize font-weight-bold">{{$actualite->titre}}</h2>
-          <div class="col-md-8">
+          <div class="col-md-12">
+            <h2 class="my-2 text-capitalize font-weight-bold">{{$actualite->titre}}</h2>
+        </div>
+         <div class="col-md-8">
 
 
             <!-- Blog Post -->
-            <div class="card my-4">
+            <div class="card my-2">
               <img class="card-img-top" src="{{asset('storage/'.$actualite->image_couverture)}}" alt="Card image cap"style="height:450px">
               <div class="card-body">
                 <h2 class="card-title">{{$actualite->categorie->titre}}</h2>
@@ -58,7 +60,7 @@ setlocale(LC_TIME, "fr_FR", "French");
           <div class="col-md-4">
 
             <!-- Search Widget -->
-            <div class="card my-4">
+            <div class="card my-2">
               <h5 class="card-header">Rechercher</h5>
               <div class="card-body">
                 <div class="input-group">

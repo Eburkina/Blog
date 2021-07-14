@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function index(){
-        
-        return view('vendor.pages.frontend.actualites.index', ['actualite'=> Actualite::paginate(10)]);
+
+        return view('vendor.pages.frontend.actualites.index', ['actualite'=> Actualite::where('publish',1)->paginate(10)]);
     }
 
    public function show($uuid){
@@ -20,19 +20,20 @@ class BlogController extends Controller
        return view('vendor.pages.frontend.actualites.show',[
                     'actualite'=>Actualite::where('uuid', $uuid)->first(),
                     'categorie'=>Category::all(),
-                    'actualites'=>Actualite::all()
+                    'actualites'=>Actualite::where('publish',1)->get(),
                     ]);
    }
 
    public function search(Request $request)
    {
-   
+
        return view('vendor.pages.frontend.actualites.search', [
-           'search'=>Actualite::where('titre', 'LIKE',  "%{$request->search}%")
+           'search'=>Actualite::where('publish',1)
+                                ->where('titre', 'LIKE',  "%{$request->search}%")
                                 ->orwhere('body', 'LIKE',  "%{$request->search}%")
                                 ->orwhere('tags', 'LIKE',  "%{$request->search}%")
                                 ->paginate(6),
-        'recherche' => $request->search
+        '   recherche' => $request->search
 
        ]);
    }
@@ -40,13 +41,17 @@ class BlogController extends Controller
    public function actualitebycategorie($uuid)
    {
        return view('vendor.pages.frontend.actualites.actubycategorie',[
-           'actualite'=>Actualite::where('category_id', $uuid)->get(),
+           'actualite'=>Actualite::where('category_id', $uuid)
+                                   ->where('publish',1)
+                                    ->get(),
            'categorie'=>Category::where('uuid', $uuid)->first()
            ]);
    }
    public function actualitebytags($tags)
    {
-       return view('vendor.pages.frontend.actualites.actubytag', ['actualite'=>Actualite::where('tags', 'LIKE',  "%{$tags}%")->get(), 'tags'=>$tags]);
+       return view('vendor.pages.frontend.actualites.actubytag', ['actualite'=>Actualite::where('tags', 'LIKE',  "%{$tags}%")
+                                                                                            ->where('publish',1)
+                                                                                            ->get(), 'tags'=>$tags]);
    }
 
 }
